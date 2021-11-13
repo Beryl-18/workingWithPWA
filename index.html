@@ -6,6 +6,21 @@
 
         <!-- linking the lesson plan script-->
         <script src="lessons.js"></script>
+        <style>
+            body{
+                margin:0;
+            }
+            #lessonBlock{
+                background-color: black;
+                color:white;
+                padding:35px;
+                width:15%;
+                height:30%;
+                margin:2%;
+                border:3%;
+
+            }
+        </style>
 
     </head>
     <body>
@@ -17,6 +32,26 @@
         <!-- Lesson Plans Division-->
         <div id="lessonplanapp">
 
+            <!-- Page Subtile -->
+            <div><span style="font-weight: bold; font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif; font-size: x-large;" v-text="lessonsub"></span></div>
+
+            <!-- ||||||||||| ADD font awesome icon  ||||||||||| -->
+            <!-- Displaying Lessons individually -->
+            <div id="lessonBlock" v-for="lesson in lessons" style="display:inline-block;">
+                <div v-if="lesson.showLesson">
+                    <!-- lesson information -->
+                    <h2 v-text="lesson.Subject"></h2>
+                    <img style="width:50px;height:50px" v-bind:src="lesson.image">
+                    <h4 v-text="lesson.Location"></h4>
+                    <h4 v-text="lesson.price"></h4>
+
+                    <!-- Cart Button -->
+
+                </div>
+
+
+            </div>
+
         </div>
 
 
@@ -25,8 +60,9 @@
             var webstore = new Vue({
                 el:lessonplanapp,
                 data:{
+                    lessonsub: 'Browse Our Lesson Catalogue',
                     lessons:lessons,
-                    
+                    cart:[]
 
                 }
             })

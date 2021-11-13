@@ -6,7 +6,7 @@ let lessons = [
         "price" : 200.00,
         "image" : 'catfood.jpg',
         "spaces": 5,
-        "showProduct": true
+        "showLesson": true
     },
     {
         "id" : '2',
@@ -15,7 +15,7 @@ let lessons = [
         "price" : 180.00,
         "image" : 'catfood.jpg',
         "spaces": 5,
-        "showProduct": true
+        "showLesson": true
     },
     {
         "id" : '3',
@@ -24,7 +24,7 @@ let lessons = [
         "price" : 180.00,
         "image" : 'catfood.jpg',
         "spaces": 5,
-        "showProduct": true
+        "showLesson": true
     },
     {
         "id" : '4',
@@ -33,7 +33,7 @@ let lessons = [
         "price" : 150.00,
         "image" : 'catfood.jpg',
         "spaces": 5,
-        "showProduct": true
+        "showLesson": true
     },
     {
         "id" : '5',
@@ -42,7 +42,7 @@ let lessons = [
         "price" : 150.00,
         "image" : 'catfood.jpg',
         "spaces": 5,
-        "showProduct": true
+        "showLesson": true
     },
     {
         "id" : '6',
@@ -51,7 +51,7 @@ let lessons = [
         "price" : 420.00,
         "image" : 'catfood.jpg',
         "spaces": 5,
-        "showProduct": true
+        "showLesson": true
     },
     {
         "id" : '7',
@@ -60,7 +60,7 @@ let lessons = [
         "price" : 425.00,
         "image" : 'catfood.jpg',
         "spaces": 5,
-        "showProduct": true
+        "showLesson": true
     },
     {
         "id" : '8',
@@ -69,7 +69,7 @@ let lessons = [
         "price" : 750.00,
         "image" : 'catfood.jpg',
         "spaces": 5,
-        "showProduct": true
+        "showLesson": true
     },
     {
         "id" : '9',
@@ -78,7 +78,7 @@ let lessons = [
         "price" : 500.00,
         "image" : 'catfood.jpg',
         "spaces": 5,
-        "showProduct": true
+        "showLesson": true
     },
     {
         "id" : '10',
@@ -87,7 +87,7 @@ let lessons = [
         "price" : 350.00,
         "image" : 'catfood.jpg',
         "spaces": 5,
-        "showProduct": true
+        "showLesson": true
     },
 
 ]
