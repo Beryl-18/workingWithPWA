@@ -1,0 +1,37 @@
+<html>
+    <head>
+        <!-- linking the external files from font awesome and vuejs-->
+        <link rel="stylesheet"href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
+        <script src = "https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+        <!-- linking the lesson plan script-->
+        <script src="lessons.js"></script>
+
+    </head>
+    <body>
+        <!-- Shoppping Cart Button -->
+
+
+
+        <!-- Main Body -->
+        <!-- Lesson Plans Division-->
+        <div id="lessonplanapp">
+
+        </div>
+
+
+        <!-- Vuejs Script -->
+        <script type="text/javascript">
+            var webstore = new Vue({
+                el:lessonplanapp,
+                data:{
+                    lessons:lessons,
+                    
+
+                }
+            })
+        </script>
+
+
+    </body>
+</html>
