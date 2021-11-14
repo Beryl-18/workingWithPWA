@@ -24,33 +24,60 @@
 
     </head>
     <body>
-        <!-- Shoppping Cart Button -->
 
-
-
-        <!-- Main Body -->
-        <!-- Lesson Plans Division-->
+        <!-- Container Div-->
         <div id="lessonplanapp">
+            <!-- Shoppping Cart Button -->
+            <div>
+                <button>
+                    <!-- create logic to switch between checkout and lesson plan? -->
+                    {{cartAggregate}} Checkout
+                </button>
 
-            <!-- Page Subtile -->
-            <div><span style="font-weight: bold; font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif; font-size: x-large;" v-text="lessonsub"></span></div>
+            </div>
 
-            <!-- ||||||||||| ADD font awesome icon  ||||||||||| -->
-            <!-- Displaying Lessons individually -->
-            <div id="lessonBlock" v-for="lesson in lessons" style="display:inline-block;">
-                <div v-if="lesson.showLesson">
-                    <!-- lesson information -->
-                    <h2 v-text="lesson.Subject"></h2>
-                    <img style="width:50px;height:50px" v-bind:src="lesson.image">
-                    <h4 v-text="lesson.Location"></h4>
-                    <h4 v-text="lesson.price"></h4>
 
-                    <!-- Cart Button -->
+            <!-- Main Body -->
+            <!-- Lesson Plans Division-->
+            <div id="lessonDisplayDiv">
+
+                <!-- Page Subtile -->
+                <div><span style="font-weight: bold; font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif; font-size: x-large;" v-text="lessonsub"></span></div>
+
+                <!-- ||||||||||| ADD font awesome icon  ||||||||||| -->
+                <!-- Displaying Lessons individually -->
+                <div id="lessonBlock" v-for="lesson in lessons" style="display:inline-block;">
+                    <div v-if="lesson.showLesson">
+                        <!-- lesson information -->
+                        <h2 v-text="lesson.Subject"></h2>
+                        <img style="width:50px;height:50px" v-bind:src="lesson.image">
+                        <h4 v-text="lesson.Location"></h4>
+                        <h4 v-text="lesson.price"></h4>
+
+                        <!-- Cart Button -->
+                        <button v-if="canAddTocart(lesson)" v-on:click="addtoCart(lesson)">
+                            Add To Cart
+                        </button>
+                        <button v-else disabled>
+                            Add To Cart
+                        </button>
+
+                        <!-- product count message-->
+                        <span v-if="canAddTocart(lesson) == false ">
+                            All Spaces Booked!
+                        </span>
+                        <!-- only less than 3 left -->
+                        <span v-else-if="lesson.spaces <= 3">Only {{lesson.spaces}} Spaces Left! </span>
+                        
+
+                    </div>
+
 
                 </div>
 
-
             </div>
+
+            <!-- Checkout and Shopping Cart Division -->
 
         </div>
 
@@ -63,6 +90,27 @@
                     lessonsub: 'Browse Our Lesson Catalogue',
                     lessons:lessons,
                     cart:[]
+
+                },
+                methods:{
+                    canAddTocart: function(course) {
+                        if (course.spaces > 0){
+                            return true;
+                        }
+                        else {
+                            return false;
+                        }
+                    },
+                    addtoCart: function(course) {
+                        this.cart.push(course);
+                        course.spaces = course.spaces - 1;
+                    }
+
+                },
+                computed:{
+                    cartAggregate: function(){
+                        return this.cart.length;
+                    }
 
                 }
             })
