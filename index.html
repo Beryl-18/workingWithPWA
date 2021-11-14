@@ -20,6 +20,14 @@
                 border:3%;
 
             }
+            #checkoutLessons{
+                background-color:black;
+                color:white;
+                width:90%;
+                padding:10px;
+                margin:15px;
+                border-radius: 8px 8px 8px 8px;
+            }
         </style>
 
     </head>
@@ -29,7 +37,11 @@
         <div id="lessonplanapp">
             <!-- Shoppping Cart Button -->
             <div>
-                <button>
+                <button v-if="cartAggregate > 0" v-on:click="showCheckout()">
+                    <!-- create logic to switch between checkout and lesson plan? -->
+                    {{cartAggregate}} Checkout
+                </button>
+                <button v-else disabled>
                     <!-- create logic to switch between checkout and lesson plan? -->
                     {{cartAggregate}} Checkout
                 </button>
@@ -39,7 +51,7 @@
 
             <!-- Main Body -->
             <!-- Lesson Plans Division-->
-            <div id="lessonDisplayDiv">
+            <div v-if="checkoutLogic" id="lessonDisplayDiv">
 
                 <!-- Page Subtile -->
                 <div><span style="font-weight: bold; font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif; font-size: x-large;" v-text="lessonsub"></span></div>
@@ -78,6 +90,26 @@
             </div>
 
             <!-- Checkout and Shopping Cart Division -->
+            <div id="cartDisplayDiv" v-else>
+                <!-- Page Subtile -->
+                <div><span style="font-weight: bold; font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif; font-size: x-large;" v-text="checkoutsub"></span></div>
+
+                <!-- Lesson list of added lessons -->
+                <div v-for="lesson in cart" id="checkoutLessons">
+                    <!-- Lesson Details displayed -->
+                    <span v-text="lesson.Subject"></span>
+                    <span style="margin-left:200px;"> Location: <span v-text="lesson.Location"></span></span>
+                    <div>
+                        <span>Price Per Lesson: <span v-text = "lesson.price"></span></span>
+                        <span style="margin-left:200px"> Spaces Chosen: <span v-text="lesson.spaces"></span></span>
+                    </div>
+
+                    <!-- Removal Button -->
+
+
+                </div>
+
+            </div>
 
         </div>
 
@@ -89,7 +121,9 @@
                 data:{
                     lessonsub: 'Browse Our Lesson Catalogue',
                     lessons:lessons,
-                    cart:[]
+                    checkoutLogic: true,
+                    cart:[],
+                    checkoutsub: 'Your Shopping Cart'
 
                 },
                 methods:{
@@ -104,6 +138,9 @@
                     addtoCart: function(course) {
                         this.cart.push(course);
                         course.spaces = course.spaces - 1;
+                    },
+                    showCheckout: function() {
+                        this.checkoutLogic ? this.checkoutLogic = false : this.checkoutLogic = true;
                     }
 
                 },
