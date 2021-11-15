@@ -6,6 +6,7 @@ let lessons = [
         "price" : 200.00,
         "image" : 'catfood.jpg',
         "spaces": 5,
+        "quantity":0,
         "showLesson": true
     },
     {
@@ -15,6 +16,7 @@ let lessons = [
         "price" : 180.00,
         "image" : 'catfood.jpg',
         "spaces": 5,
+        "quantity":0,
         "showLesson": true
     },
     {
@@ -24,6 +26,7 @@ let lessons = [
         "price" : 180.00,
         "image" : 'catfood.jpg',
         "spaces": 5,
+        "quantity":0,
         "showLesson": true
     },
     {
@@ -33,6 +36,7 @@ let lessons = [
         "price" : 150.00,
         "image" : 'catfood.jpg',
         "spaces": 5,
+        "quantity":0,
         "showLesson": true
     },
     {
@@ -42,6 +46,7 @@ let lessons = [
         "price" : 150.00,
         "image" : 'catfood.jpg',
         "spaces": 5,
+        "quantity":0,
         "showLesson": true
     },
     {
@@ -51,6 +56,7 @@ let lessons = [
         "price" : 420.00,
         "image" : 'catfood.jpg',
         "spaces": 5,
+        "quantity":0,
         "showLesson": true
     },
     {
@@ -60,6 +66,7 @@ let lessons = [
         "price" : 425.00,
         "image" : 'catfood.jpg',
         "spaces": 5,
+        "quantity":0,
         "showLesson": true
     },
     {
@@ -69,6 +76,7 @@ let lessons = [
         "price" : 750.00,
         "image" : 'catfood.jpg',
         "spaces": 5,
+        "quantity":0,
         "showLesson": true
     },
     {
@@ -78,6 +86,7 @@ let lessons = [
         "price" : 500.00,
         "image" : 'catfood.jpg',
         "spaces": 5,
+        "quantity":0,
         "showLesson": true
     },
     {
@@ -87,6 +96,7 @@ let lessons = [
         "price" : 350.00,
         "image" : 'catfood.jpg',
         "spaces": 5,
+        "quantity":0,
         "showLesson": true
     },
 

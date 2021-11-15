@@ -81,11 +81,11 @@
                         <!-- only less than 3 left -->
                         <span v-else-if="lesson.spaces <= 3">Only {{lesson.spaces}} Spaces Left! </span>
                         
-
                     </div>
 
-
                 </div>
+
+                {{cart}}
 
             </div>
 
@@ -95,17 +95,20 @@
                 <div><span style="font-weight: bold; font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif; font-size: x-large;" v-text="checkoutsub"></span></div>
 
                 <!-- Lesson list of added lessons -->
-                <div v-for="lesson in cart" id="checkoutLessons">
+                <!-- need to change and display an item only once in the cart -->
+                <div v-for="item in cart" id="checkoutLessons">
                     <!-- Lesson Details displayed -->
-                    <span v-text="lesson.Subject"></span>
-                    <span style="margin-left:200px;"> Location: <span v-text="lesson.Location"></span></span>
+                    <span v-text="item.Subject"></span>
+                    <span style="margin-left:200px;"> Location: <span v-text="item.Location"></span></span>
                     <div>
-                        <span>Price Per Lesson: <span v-text = "lesson.price"></span></span>
-                        <span style="margin-left:200px"> Spaces Chosen: <span v-text="lesson.spaces"></span></span>
+                        <span>Price Per Lesson: <span v-text = "item.price"></span></span>
+                        <span style="margin-left:200px"> Spaces Chosen: <span v-text="item.quantity"></span></span>
                     </div>
 
                     <!-- Removal Button -->
-
+                    <button v-on:click="remove(item)">
+                        Remove a Space
+                    </button>
 
                 </div>
 
@@ -135,12 +138,52 @@
                             return false;
                         }
                     },
-                    addtoCart: function(course) {
+                    // addtoCart: function(course) {
+                    //     let itemInCart;
+                    //     let itemId;
+
+                    //     for (i = 0; i <= this.cart.length; i++){
+                    //         if (cart[i].id === course.id){
+                    //             itemInCart = true;
+                    //             itemId = cart[i].id;
+                    //         }
+                    //         else {
+                    //             itemInCart = false;
+                    //         }
+                    //     }
+
+                    //     if (!itemInCart){
+                    //         let lessonToCart = {
+                    //             "id" : course.id,
+                    //             "Subject" : course.Subject,
+                    //             "price" : course.price,
+                    //             "image" : course.image,
+                    //             "Location" : course.Location,
+                    //             "spacesReserved": 1
+                    //         }
+                    //         this.cart.push(lessonToCart);
+                    //         course.spaces = course.spaces - 1;
+                    //     }
+                    //     else {
+                    //         cart[itemId].spacesReserved = cart[itemId].spacesReserved + 1;
+                    //         course.spaces = course.spaces - 1;
+                    //     }
+                    // },
+
+                    addtoCart: function(course){
                         this.cart.push(course);
+                        course.quantity = course.quantity + 1;
                         course.spaces = course.spaces - 1;
                     },
+
                     showCheckout: function() {
                         this.checkoutLogic ? this.checkoutLogic = false : this.checkoutLogic = true;
+                    },
+
+                    remove: function(course){
+
+                        course.quantity = course.quantity - 1;
+                        course.spaces = course.spaces + 1;
                     }
 
                 },
@@ -148,6 +191,7 @@
                     cartAggregate: function(){
                         return this.cart.length;
                     }
+                    //add a remaining spaces live update
 
                 }
             })
