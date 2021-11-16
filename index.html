@@ -79,7 +79,7 @@
                             All Spaces Booked!
                         </span>
                         <!-- only less than 3 left -->
-                        <span v-else-if="lesson.spaces <= 3">Only {{lesson.spaces}} Spaces Left! </span>
+                        <span v-else-if="lesson.spaces - quantityAgg(lesson) <= 3">Only {{lesson.spaces}} Spaces Left! </span>
                         
                     </div>
 
@@ -109,7 +109,6 @@
                     <button v-on:click="remove(item)">
                         Remove a Space
                     </button>
-
                 </div>
 
             </div>
@@ -181,9 +180,18 @@
                     },
 
                     remove: function(course){
+                        //if there's 1 quantity, then remove quantity from cart
+                        let indexfound = false;
+                        if (course.quantity == 1 ){
+                            this.cart.splice(this.cart.indexOf(course),1);
+                        }
 
                         course.quantity = course.quantity - 1;
                         course.spaces = course.spaces + 1;
+
+                    },
+                    quantityAgg : function(course){
+                        return course.quantity;
                     }
 
                 },
@@ -191,8 +199,6 @@
                     cartAggregate: function(){
                         return this.cart.length;
                     }
-                    //add a remaining spaces live update
-
                 }
             })
         </script>
