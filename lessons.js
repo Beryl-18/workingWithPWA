@@ -7,8 +7,7 @@ let lessons = [
         "image" : 'catfood.jpg',
         "spaces": 5,
         "quantity":0,
-        "showLesson": true,
-        "displayed":false
+        "showLesson": true
     },
     {
         "id" : 2,
@@ -18,8 +17,7 @@ let lessons = [
         "image" : 'catfood.jpg',
         "spaces": 5,
         "quantity":0,
-        "showLesson": true,
-        "displayed":false
+        "showLesson": true
     },
     {
         "id" : 3,
@@ -29,8 +27,7 @@ let lessons = [
         "image" : 'catfood.jpg',
         "spaces": 5,
         "quantity":0,
-        "showLesson": true,
-        "displayed":false
+        "showLesson": true
     },
     {
         "id" : 4,
@@ -40,8 +37,7 @@ let lessons = [
         "image" : 'catfood.jpg',
         "spaces": 5,
         "quantity":0,
-        "showLesson": true,
-        "displayed":false
+        "showLesson": true
     },
     {
         "id" : 5,
@@ -51,8 +47,7 @@ let lessons = [
         "image" : 'catfood.jpg',
         "spaces": 5,
         "quantity":0,
-        "showLesson": true,
-        "displayed":false
+        "showLesson": true
     },
     {
         "id" : 6,
@@ -62,8 +57,7 @@ let lessons = [
         "image" : 'catfood.jpg',
         "spaces": 5,
         "quantity":0,
-        "showLesson": true,
-        "displayed":false
+        "showLesson": true
     },
     {
         "id" : 7,
@@ -73,8 +67,7 @@ let lessons = [
         "image" : 'catfood.jpg',
         "spaces": 5,
         "quantity":0,
-        "showLesson": true,
-        "displayed":false
+        "showLesson": true
     },
     {
         "id" : 8,
@@ -84,8 +77,7 @@ let lessons = [
         "image" : 'catfood.jpg',
         "spaces": 5,
         "quantity":0,
-        "showLesson": true,
-        "displayed":false
+        "showLesson": true
     },
     {
         "id" : 9,
@@ -95,8 +87,7 @@ let lessons = [
         "image" : 'catfood.jpg',
         "spaces": 5,
         "quantity":0,
-        "showLesson": true,
-        "displayed":false
+        "showLesson": true
     },
     {
         "id" : 10,
@@ -106,8 +97,7 @@ let lessons = [
         "image" : 'catfood.jpg',
         "spaces": 5,
         "quantity":0,
-        "showLesson": true,
-        "displayed":false
+        "showLesson": true
     },
 
 ]
