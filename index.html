@@ -131,19 +131,18 @@
 
                 <!-- Checkout Details of Customer -->
                 <div name="checkoutSection" style="margin:20px;border:20px;">
-                    <span >Full Name : <input type="text" v-if="cartAggregate <= 0" disabled> <input v-else type="text" v-model="checkoutDetails.fullName"></span>
-                    <span>Phone Number : <input type="text" v-if="cartAggregate <= 0" disabled><input v-else type="text" v-model="checkoutDetails.phoneNumber"></span>
+                    <span >Full Name : <input type="text" v-if="cartAggregate <= 0" disabled> <input v-else type="text" v-model="checkoutDetails.fullName" id="checkoutName"></span>
+                    <span>Phone Number : <input type="text" v-if="cartAggregate <= 0" disabled><input v-else type="text" v-model="checkoutDetails.phone" id="checkoutNumber"></span>
 
 
                     <!-- enable checkout if both full name and phone number are entered without errors, else disable-->
-                    <button > Checkout </button>
+                    <button v-if="enableCheckout" v-on:click="checkoutConfirm"> Checkout </button> 
+                    <button v-else disabled> Checkout </button>
 
                     <!-- display errors for user information -->
                     <span class="error" v-if="checkoutNameErrs"> please enter a valid name </span> <span v-else></span>
                     <span class="error" v-if="checkoutPhoneErrs"> please enter a valid phone number </span> <span v-else></span>
 
-                    {{checkoutDetails.fullName}}
-                    {{checkoutDetails.phoneNumber}}
                 </div>
 
 
@@ -212,8 +211,11 @@
                     },
                     quantityAgg : function(course){
                         return course.quantity;
+                    },
+                    checkoutConfirm : function (){
+                        alert("Order Has Been placed for " + this.checkoutDetails.fullName +". Thank you!");
+                        
                     }
-
                 },
                 computed:{
                     cartAggregate(){
@@ -226,10 +228,6 @@
                             }
                         }
                         return itemcounter;
-                    },
-                    cartTotal(){
-                    // update and return the total price of the cart
-                    // 
                     },
                     sortlessons(){
                         type = this.type;
@@ -259,23 +257,37 @@
                         else {
                             return false;
                         }
+
                     },
                     checkoutPhoneErrs(){
                         //Same as checking errors with name, but with numbers only
                         let phone = this.checkoutDetails.phone;
-                        let pattern = /^(0|[1-9][0-9]*)$/;
+                        let pattern = /^([0-9]*)$/;
 
-                        //check if pattern passes the expression test
+                        // check if pattern passes the expression test
                         if (!pattern.test(phone)){
                             return true;
                         }
                         else {
                             return false;
                         }
+
+                        return false;
                     },
                     enableCheckout(){
                         //check if all errors are resolved, thus allowing checkout
-                        
+                        let name = this.checkoutDetails.fullName;
+                        let Npattern = /^[a-zA-Z ]*$/;
+                        let Ppattern = /^([0-9]*)$/;
+                        let phone = this.checkoutDetails.phone;
+
+
+                        if (this.cart.length > 0 && Npattern.test(name) && Ppattern.test(phone) && name.length > 2 && phone.length > 2){
+                            return true;
+                        }
+                        else {
+                            return false;
+                        }
                     }
                 }
             })
