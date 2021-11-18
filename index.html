@@ -65,11 +65,12 @@
                         <option v-for="type in types" v-bind:value="type"> {{type}}</option>
                     </select>
 
-                    <input type="radio" value="true" v-model="ascending" default>
+                    <input type="radio" name="order" v-on:click="toggleOrder(true)" checked>
                     <label for="asc">Ascending</label>
-                    <input type="radio" value="false" v-model="ascending">
+                    <input type="radio" name= "order" v-on:click="toggleOrder(false)">
                     <label for="desc">Descending</label>
 
+                    {{ascending}}
                 </div> 
 
                 <!-- Search section -->
@@ -186,7 +187,7 @@
                     },
 
                     //Function to push items to cart
-                    addtoCart: function(course){
+                    addtoCart(course){
 
                         let lessonIncart = this.cart.find(i => i.id == course.id);
                         if (lessonIncart){
@@ -202,12 +203,23 @@
                     },
 
                     //Function to toggle between checkout page and lesson page
-                    showCheckout: function() {
+                    showCheckout() {
                         this.checkoutLogic ? this.checkoutLogic = false : this.checkoutLogic = true;
                     },
 
+                    //function to toggle between ascending and descending
+                    toggleOrder(order) {
+                        if(order){
+                            this.ascending = true;
+                        }
+                        else if(!order){
+                            this.ascending = false;
+                        }
+                    },
+
                     //Function to remove 1 space from an item in cart
-                    remove: function(course){
+                    remove(course){
+                        
                         //if there's 1 quantity, then remove quantity from cart
                         if (course.quantity == 1 ){
                             this.cart.splice(this.cart.indexOf(course),1);
@@ -219,7 +231,7 @@
                     },
                     
                     //Function to process Checkout
-                    checkoutConfirm : function (){
+                    checkoutConfirm(){
                         alert("Order Has Been placed for " + this.checkoutDetails.fullName +". Thank you!");
 
                         //reset cart and refresh the page
@@ -246,6 +258,7 @@
                         let type = this.type;
                         let search = this.searchText;
 
+                        //the compare function
                         function compare(a,b){
                             if (a[type] > b[type]){
                                 return 1;
@@ -258,13 +271,21 @@
                             }
                         }
 
+                        //if search text isn't entered, order directly. else search, filter then sort
                         if (search.length <= 0){
-                            return this.lessons.sort(compare);
+
+                            if (this.ascending){
+                                return this.lessons.sort(compare);
+                            }
+                            else if (!this.ascending){
+                                return this.lessons.sort(compare).reverse();
+                            }
                         }
                         else if( search.length > 0){
 
                             search = search.toLowerCase();
-                            return this.lessons.filter((lesson)=>{
+
+                            let searchedArray = this.lessons.filter((lesson)=>{
                                 let subject = lesson.Subject.toLowerCase();
                                 let location = lesson.Location.toLowerCase();
 
@@ -278,15 +299,23 @@
                                     return false;
                                 }
 
-                            }).sort(compare);
-                        }
+                            });
 
+                            if (this.ascending){
+                                return searchedArray.sort(compare);
+                            }
+                            else if (!this.ascending){
+                                return searchedArray.sort(compare).reverse();
+                            }
+                        }
                     },
                     //Validating the Name text field in Checkout Page
                     checkoutNameErrs(){
+
                         //check all conditions, if no errors exist, return false. else true;
                         let name = this.checkoutDetails.fullName;
                         let pattern = /^[a-zA-Z ]*$/;
+
                         //check if name passes express test
                         if (!pattern.test(name)){
                             return true;
@@ -294,11 +323,11 @@
                         else {
                             return false;
                         }
-
                     },
 
                     //Validating the Phone number field in Checkout Page
                     checkoutPhoneErrs(){
+
                         //Same as checking errors with name, but with numbers only
                         let phone = this.checkoutDetails.phone;
                         let pattern = /^([0-9]*)$/;
@@ -310,18 +339,16 @@
                         else {
                             return false;
                         }
-
-                        return false;
                     },
 
                     //Validating control for the checkout button
                     enableCheckout(){
+
                         //if all errors are resolved => allow checkout
                         let name = this.checkoutDetails.fullName;
                         let Npattern = /^[a-zA-Z ]*$/;
                         let Ppattern = /^([0-9]*)$/;
                         let phone = this.checkoutDetails.phone;
-
 
                         if (this.cart.length > 0 && Npattern.test(name) && Ppattern.test(phone) && name.length > 2 && phone.length > 2){
                             return true;
@@ -333,7 +360,5 @@
                 }
             })
         </script>
-
-
     </body>
 </html>
