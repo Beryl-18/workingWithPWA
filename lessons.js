@@ -31,7 +31,7 @@ let lessons = [
     },
     {
         "id" : 4,
-        "Subject" : 'Geography',
+        "Subject" : 'Pottery',
         "Location" : 'Qusais',
         "price" : 150.00,
         "image" : 'catfood.jpg',
@@ -41,7 +41,7 @@ let lessons = [
     },
     {
         "id" : 5,
-        "Subject" : 'History',
+        "Subject" : 'Cricket',
         "Location" : 'Bur Dubai',
         "price" : 150.00,
         "image" : 'catfood.jpg',
@@ -71,7 +71,7 @@ let lessons = [
     },
     {
         "id" : 8,
-        "Subject" : 'Stocks Trading',
+        "Subject" : 'Soccer',
         "Location" : 'Jumeirah',
         "price" : 750.00,
         "image" : 'catfood.jpg',
@@ -91,7 +91,7 @@ let lessons = [
     },
     {
         "id" : 10,
-        "Subject" : 'Physics',
+        "Subject" : 'French',
         "Location" : 'Al Barsha',
         "price" : 350.00,
         "image" : 'catfood.jpg',

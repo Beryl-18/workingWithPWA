@@ -18,7 +18,6 @@
                 height:30%;
                 margin:2%;
                 border:3%;
-
             }
             #checkoutLessons{
                 background-color:black;
@@ -27,6 +26,9 @@
                 padding:10px;
                 margin:15px;
                 border-radius: 8px 8px 8px 8px;
+            }
+            .error{
+                color:red;
             }
         </style>
 
@@ -51,9 +53,12 @@
 
             <!-- Main Body -->
             <!-- Lesson Plans Division-->
-            
-                <!-- buttons for Sort and Order-->
             <div v-if="checkoutLogic" id="lessonDisplayDiv">
+
+                <!-- Page Subtile -->
+                <div><span style="font-weight: bold; font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif; font-size: x-large;" v-text="lessonsub"></span></div>
+
+                <!-- Sorting/order Buttons -->
                 <div name="sorting_options">
                     <select v-model="type">
                         <option disabled value="">Type</option>
@@ -62,17 +67,20 @@
 
                     <input type="radio" value="true" v-model="ascending" default>
                     <label for="asc">Ascending</label>
-                    <input type="radio" value="false" v-model="order.method">
+                    <input type="radio" value="false" v-model="ascending">
                     <label for="desc">Descending</label>
 
-                </div>
+                </div> 
 
-                <!-- Page Subtile -->
-                <div><span style="font-weight: bold; font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif; font-size: x-large;" v-text="lessonsub"></span></div>
+                <!-- Search Button -->
+                <div>   
+                    <br>
+                    Search <input type="text"> <button> Go </button>
+                </div>
 
                 <!-- ||||||||||| ADD font awesome icon  ||||||||||| -->
                 <!-- Displaying Lessons individually -->
-                <div id="lessonBlock" v-for="lesson in sortedCart" style="display:inline-block;">
+                <div id="lessonBlock" v-for="lesson in sortlessons" style="display:inline-block;">
                     <div v-if="lesson.showLesson">
                         <!-- lesson information -->
                         <h2 v-text="lesson.Subject"></h2>
@@ -94,9 +102,7 @@
                         </span>
                         <!-- only less than 3 left -->
                         <span v-else-if="lesson.spaces - quantityAgg(lesson) <= 3">Only {{lesson.spaces}} Spaces Left! </span>
-                        
                     </div>
-
                 </div>
 
             </div>
@@ -107,7 +113,7 @@
                 <div><span style="font-weight: bold; font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif; font-size: x-large;" v-text="checkoutsub"></span></div>
 
                 <!-- Lesson list of added lessons -->
-                <div v-for="item in sortedCart" id="checkoutLessons">
+                <div v-for="item in cart" id="checkoutLessons">
                     <!-- Lesson Details displayed -->
 
                     <span v-text="item.Subject"></span>
@@ -125,8 +131,19 @@
 
                 <!-- Checkout Details of Customer -->
                 <div name="checkoutSection" style="margin:20px;border:20px;">
-                    <span >Full Name : <input type="text" v></span>
-                    <span>Phone Number : <input type="text" v> </span>
+                    <span >Full Name : <input type="text" v-if="cartAggregate <= 0" disabled> <input v-else type="text" v-model="checkoutDetails.fullName"></span>
+                    <span>Phone Number : <input type="text" v-if="cartAggregate <= 0" disabled><input v-else type="text" v-model="checkoutDetails.phoneNumber"></span>
+
+
+                    <!-- enable checkout if both full name and phone number are entered without errors, else disable-->
+                    <button > Checkout </button>
+
+                    <!-- display errors for user information -->
+                    <span class="error" v-if="checkoutNameErrs"> please enter a valid name </span> <span v-else></span>
+                    <span class="error" v-if="checkoutPhoneErrs"> please enter a valid phone number </span> <span v-else></span>
+
+                    {{checkoutDetails.fullName}}
+                    {{checkoutDetails.phoneNumber}}
                 </div>
 
 
@@ -138,12 +155,12 @@
         <!-- Vuejs Script -->
         <script type="text/javascript">
             var webstore = new Vue({
-                el:lessonplanapp,
+                el:'#lessonplanapp',
                 data:{
                     lessonsub: 'Browse Our Lesson Catalogue',
                     lessons:lessons,
                     checkoutLogic: true,
-                    ascending:true,
+                    ascending: true,
                     type:'',
                     types:['Subject','Location','price'],
                     cart:[],
@@ -176,14 +193,11 @@
                             this.cart.push(course);
                             course.quantity++;
                             course.spaces = course.spaces - 1;
-
                         }
                     },
 
                     showCheckout: function() {
                         this.checkoutLogic ? this.checkoutLogic = false : this.checkoutLogic = true;
-                        
-                        alert(match);
                     },
 
                     remove: function(course){
@@ -202,7 +216,7 @@
 
                 },
                 computed:{
-                    cartAggregate: function(){
+                    cartAggregate(){
                         
                         let itemcounter = 0;
 
@@ -213,39 +227,55 @@
                         }
                         return itemcounter;
                     },
-                    cartTotal: function(){
+                    cartTotal(){
                     // update and return the total price of the cart
                     // 
                     },
-                    sortedLessons: function(){
-                        //change order within cart array depending on chosen buttons
-                        let sortL = this.lessons.splice(0);
-                        function compare (a,b){
-                            if (this.ascending){
-                                if (a[this.type] > b[this.type]){
-                                    return 1;
-                                }
-                                else if (a[this.type] < b[this.type]){
-                                    return -1;
-                                }
-                                else {
-                                    return 0;
-                                }
+                    sortlessons(){
+                        type = this.type;
+
+                        function compare(a,b){
+                            if (a[type] > b[type]){
+                                return 1;
+                            }
+                            else if (a[type] < b[type]){
+                                return -1;
                             }
                             else {
-                                if (a[this.type] > b[this.type]){
-                                    return -1;
-                                }
-                                else if (a[this.type] < b[this.type]){
-                                    return 1;
-                                }
-                                else{
-                                    return 0;
-                                }
+                                return 0;
                             }
                         }
-                        return sortL.sort(compare);
 
+                        return this.lessons.sort(compare);
+                    },
+                    checkoutNameErrs(){
+                        //check all conditions, if no errors exist, return false. else true;
+                        let name = this.checkoutDetails.fullName;
+                        let pattern = /^[a-zA-Z ]*$/;
+                        //check if name passes express test
+                        if (!pattern.test(name)){
+                            return true;
+                        }
+                        else {
+                            return false;
+                        }
+                    },
+                    checkoutPhoneErrs(){
+                        //Same as checking errors with name, but with numbers only
+                        let phone = this.checkoutDetails.phone;
+                        let pattern = /^(0|[1-9][0-9]*)$/;
+
+                        //check if pattern passes the expression test
+                        if (!pattern.test(phone)){
+                            return true;
+                        }
+                        else {
+                            return false;
+                        }
+                    },
+                    enableCheckout(){
+                        //check if all errors are resolved, thus allowing checkout
+                        
                     }
                 }
             })

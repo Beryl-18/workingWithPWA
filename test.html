@@ -1,0 +1,23 @@
+<head>
+    <script src = "https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+<script language="JavaScript" src="/Users/abeysamuel/Documents/CST3145 Web:App Dev/vuejsIndProject/e-commerce-lessonplan/lessons.js"></script>
+</head> 
+<body>
+    <button v:on:click="arrSearch">Search</button>
+    <script language="text/javascript">
+        var webstore = new Vue ({
+            data:{
+                testArray:lessons,
+                search: "ch"
+            },
+            methods:{
+                arrSearch: function(){
+                    console.log("hello");
+
+                }
+            }
+        })
+
+    </script>
+</body>
