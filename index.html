@@ -72,10 +72,10 @@
 
                 </div> 
 
-                <!-- Search Button -->
+                <!-- Search section -->
                 <div>   
                     <br>
-                    Search <input type="text" v-model="searchText"> <button> Go </button>
+                    Search <input type="text" v-model="searchText"> 
                 </div>
 
                 <!-- ||||||||||| ADD font awesome icon  ||||||||||| -->
@@ -161,7 +161,7 @@
                     checkoutLogic: true,
                     ascending: true,
                     type:'',
-                    searchText,
+                    searchText:'',
                     types:['Subject','Location','price'],
                     cart:[],
                     checkoutDetails:{
@@ -235,7 +235,8 @@
                         return itemcounter;
                     },
                     sortlessons(){
-                        type = this.type;
+                        let type = this.type;
+                        let search = this.searchText;
 
                         function compare(a,b){
                             if (a[type] > b[type]){
@@ -249,7 +250,26 @@
                             }
                         }
 
-                        return this.lessons.sort(compare);
+                        if (search.length <= 0){
+                            return this.lessons.sort(compare);
+                        }
+                        else if( search.length > 0){
+                            return this.lessons.filter((lesson)=>{
+                                let subResult = lesson.Subject.match(search);
+                                let locResult = lesson.Location.match(search);
+
+                                if (subResult || locResult){
+                                    return true;
+                                }
+                                else {
+                                    return false;
+                                }
+
+                            })
+                        }
+
+
+
                     },
                     checkoutNameErrs(){
                         //check all conditions, if no errors exist, return false. else true;
