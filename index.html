@@ -75,7 +75,7 @@
                 <!-- Search Button -->
                 <div>   
                     <br>
-                    Search <input type="text"> <button> Go </button>
+                    Search <input type="text" v-model="searchText"> <button> Go </button>
                 </div>
 
                 <!-- ||||||||||| ADD font awesome icon  ||||||||||| -->
@@ -161,6 +161,7 @@
                     checkoutLogic: true,
                     ascending: true,
                     type:'',
+                    searchText,
                     types:['Subject','Location','price'],
                     cart:[],
                     checkoutDetails:{
@@ -214,7 +215,11 @@
                     },
                     checkoutConfirm : function (){
                         alert("Order Has Been placed for " + this.checkoutDetails.fullName +". Thank you!");
-                        
+
+                        //reset cart and refresh the page
+                        this.cart.splice(0, this.cart.length);
+                        document.location.reload();
+
                     }
                 },
                 computed:{
