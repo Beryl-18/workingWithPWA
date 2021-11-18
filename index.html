@@ -237,6 +237,7 @@
                     sortlessons(){
                         let type = this.type;
                         let search = this.searchText;
+                        
 
                         function compare(a,b){
                             if (a[type] > b[type]){
@@ -254,9 +255,13 @@
                             return this.lessons.sort(compare);
                         }
                         else if( search.length > 0){
+                            search = search.toLowerCase();
                             return this.lessons.filter((lesson)=>{
-                                let subResult = lesson.Subject.match(search);
-                                let locResult = lesson.Location.match(search);
+                                let subject = lesson.Subject.toLowerCase();
+                                let location = lesson.Location.toLowerCase();
+
+                                let subResult = subject.match(search);
+                                let locResult = location.match(search);
 
                                 if (subResult || locResult){
                                     return true;
