@@ -17,31 +17,26 @@
             <div id="navbar">
 
                 <!-- Search bar-->
-                <div v-if="checkoutLogic">   
-                    <br>
-                    Search <input type="text" v-model="searchText"> 
+                <div v-if="checkoutLogic" id="search-bar-container">
+                    <input type="search" v-model="searchText" id="searchbox" placeholder="Search..."> 
                 </div>
 
                 <!-- Shoppping Cart Button -->
                 <div>
-                    <button v-if="cartAggregate > 0" v-on:click="showCheckout()">
+                    <button class="checkoutCart" v-if="cartAggregate > 0" v-on:click="showCheckout()">
                         <!-- create logic to switch between checkout and lesson plan? -->
                         {{cartAggregate}} Checkout
                     </button>
-                    <button v-else disabled>
+                    <button class="checkoutCart" v-else disabled>
                         <!-- create logic to switch between checkout and lesson plan? -->
                         {{cartAggregate}} Checkout
                     </button>
-
                 </div>
             </div>
             
             <!-- Lesson Plans Division-->
             <div v-if="checkoutLogic" id="lessonDisplayDiv">
-
-                <!-- Page Subtile -->
-                <div><span id="pagesub" v-text="lessonsub"></span></div>
-
+                <br>
                 <!-- Sorting/order Buttons -->
                 <div name="sorting_options">
                     <select v-model="type">

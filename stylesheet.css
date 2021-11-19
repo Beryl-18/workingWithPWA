@@ -1,9 +1,10 @@
 /* Direct document styling*/
 body{
     margin:0;
+    /* background-color:#0B0C10; */
 }
 
-/* ID Styling */
+/* Additional ID Styling */
 #lessonBlock{
     background-color: black;
     color:white;
@@ -37,7 +38,47 @@ body{
     font-size: x-large;
 }
 
-/* Class Styling */
+/* Styling for the navbar */
+#navbar {
+    background-color:black;
+    height:7%;
+    padding:20px;
+    padding-left:45px;
+    padding-right:45px;
+    border:10px;
+    margin:10px;
+
+}
+#searchbox{
+    float:left;
+    padding:10px;
+    width: 19%;
+    font-size:small;
+    border-radius: 7px;
+    border: 2px solid #45A29E;
+    background-color:#c5c6c7;
+}
+#searchbox:focus, :hover{
+    border: 2px solid #66fcf1;
+    background-color:white;
+}
+
+.checkoutCart{
+    padding:15px;
+    border: 2px solid #1f2833;
+    border-radius: 5px;
+    background-color:#45A29E;
+    color:#1f2833;
+    font-weight: bold;
+    transition:0.4s;
+    float:right;
+}
+.checkoutCart:hover:enabled{
+    background-color:#66fcf1;
+    transition:0.4s;
+}
+
+/* Additional Class Styling */
 .checkout-detail{
     margin-left:200px;  
 }
