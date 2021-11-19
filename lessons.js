@@ -4,7 +4,7 @@ let lessons = [
         "Subject" : 'Mathematics',
         "Location" : 'Qusais',
         "price" : 200.00,
-        "image" : 'catfood.jpg',
+        "image" : 'images/math.jpg',
         "spaces": 5,
         "quantity":0,
         "showLesson": true
@@ -14,7 +14,7 @@ let lessons = [
         "Subject" : 'Biology',
         "Location" : 'Muhaisnah',
         "price" : 180.00,
-        "image" : 'catfood.jpg',
+        "image" : 'images/biology.jpg',
         "spaces": 5,
         "quantity":0,
         "showLesson": true
@@ -24,7 +24,7 @@ let lessons = [
         "Subject" : 'Chemistry',
         "Location" : 'Qusais',
         "price" : 180.00,
-        "image" : 'catfood.jpg',
+        "image" : 'images/chemistry.jpg',
         "spaces": 5,
         "quantity":0,
         "showLesson": true
@@ -34,7 +34,7 @@ let lessons = [
         "Subject" : 'Pottery',
         "Location" : 'Qusais',
         "price" : 150.00,
-        "image" : 'catfood.jpg',
+        "image" : 'images/pottery.jpg',
         "spaces": 5,
         "quantity":0,
         "showLesson": true
@@ -44,7 +44,7 @@ let lessons = [
         "Subject" : 'Cricket',
         "Location" : 'Bur Dubai',
         "price" : 150.00,
-        "image" : 'catfood.jpg',
+        "image" : 'images/cricket.jpg',
         "spaces": 5,
         "quantity":0,
         "showLesson": true
@@ -54,7 +54,7 @@ let lessons = [
         "Subject" : 'Music',
         "Location" : 'Knowledge Park',
         "price" : 420.00,
-        "image" : 'catfood.jpg',
+        "image" : 'images/music.jpg',
         "spaces": 5,
         "quantity":0,
         "showLesson": true
@@ -64,7 +64,7 @@ let lessons = [
         "Subject" : 'Finance',
         "Location" : 'Deira',
         "price" : 425.00,
-        "image" : 'catfood.jpg',
+        "image" : 'images/finance.jpg',
         "spaces": 5,
         "quantity":0,
         "showLesson": true
@@ -74,7 +74,7 @@ let lessons = [
         "Subject" : 'Soccer',
         "Location" : 'Jumeirah',
         "price" : 750.00,
-        "image" : 'catfood.jpg',
+        "image" : 'images/soccer.png',
         "spaces": 5,
         "quantity":0,
         "showLesson": true
@@ -84,7 +84,7 @@ let lessons = [
         "Subject" : 'Culinary Arts',
         "Location" : 'Qusais',
         "price" : 500.00,
-        "image" : 'catfood.jpg',
+        "image" : 'images/culinary.jpg',
         "spaces": 5,
         "quantity":0,
         "showLesson": true
@@ -94,7 +94,7 @@ let lessons = [
         "Subject" : 'French',
         "Location" : 'Al Barsha',
         "price" : 350.00,
-        "image" : 'catfood.jpg',
+        "image" : 'images/french.jpg',
         "spaces": 5,
         "quantity":0,
         "showLesson": true

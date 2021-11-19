@@ -1,62 +1,46 @@
 <html>
     <head>
         <!-- linking the external files from font awesome and vuejs-->
-        <link rel="stylesheet"href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
         <script src = "https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 
-        <!-- linking the lesson plan script-->
+        <!-- linking the lesson plan script and external stylesheet-->
         <script src="lessons.js"></script>
-        <style>
-            body{
-                margin:0;
-            }
-            #lessonBlock{
-                background-color: black;
-                color:white;
-                padding:35px;
-                width:15%;
-                height:30%;
-                margin:2%;
-                border:3%;
-            }
-            #checkoutLessons{
-                background-color:black;
-                color:white;
-                width:90%;
-                padding:10px;
-                margin:15px;
-                border-radius: 8px 8px 8px 8px;
-            }
-            .error{
-                color:red;
-            }
-        </style>
+        <link rel="stylesheet" href="stylesheet.css">
 
     </head>
     <body>
 
         <!-- Container Div-->
         <div id="lessonplanapp">
-            <!-- Shoppping Cart Button -->
-            <div>
-                <button v-if="cartAggregate > 0" v-on:click="showCheckout()">
-                    <!-- create logic to switch between checkout and lesson plan? -->
-                    {{cartAggregate}} Checkout
-                </button>
-                <button v-else disabled>
-                    <!-- create logic to switch between checkout and lesson plan? -->
-                    {{cartAggregate}} Checkout
-                </button>
+            <!-- Navbar -->
+            <div id="navbar">
 
+                <!-- Search bar-->
+                <div v-if="checkoutLogic">   
+                    <br>
+                    Search <input type="text" v-model="searchText"> 
+                </div>
+
+                <!-- Shoppping Cart Button -->
+                <div>
+                    <button v-if="cartAggregate > 0" v-on:click="showCheckout()">
+                        <!-- create logic to switch between checkout and lesson plan? -->
+                        {{cartAggregate}} Checkout
+                    </button>
+                    <button v-else disabled>
+                        <!-- create logic to switch between checkout and lesson plan? -->
+                        {{cartAggregate}} Checkout
+                    </button>
+
+                </div>
             </div>
-
-
-            <!-- Main Body -->
+            
             <!-- Lesson Plans Division-->
             <div v-if="checkoutLogic" id="lessonDisplayDiv">
 
                 <!-- Page Subtile -->
-                <div><span style="font-weight: bold; font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif; font-size: x-large;" v-text="lessonsub"></span></div>
+                <div><span id="pagesub" v-text="lessonsub"></span></div>
 
                 <!-- Sorting/order Buttons -->
                 <div name="sorting_options">
@@ -69,23 +53,14 @@
                     <label for="asc">Ascending</label>
                     <input type="radio" name= "order" v-on:click="toggleOrder(false)">
                     <label for="desc">Descending</label>
-
-                    {{ascending}}
                 </div> 
 
-                <!-- Search section -->
-                <div>   
-                    <br>
-                    Search <input type="text" v-model="searchText"> 
-                </div>
-
-                <!-- ||||||||||| ADD font awesome icon  ||||||||||| -->
                 <!-- Displaying Lessons individually -->
-                <div id="lessonBlock" v-for="lesson in sortlessons" style="display:inline-block;">
+                <div id="lessonBlock" v-for="lesson in sortlessons" >
                     <div v-if="lesson.showLesson">
                         <!-- lesson information -->
                         <h2 v-text="lesson.Subject"></h2>
-                        <img style="width:50px;height:50px" v-bind:src="lesson.image">
+                        <img class="lessonimg" v-bind:src="lesson.image">
                         <h4 v-text="lesson.Location"></h4>
                         <h4 v-text="lesson.price"></h4>
 
@@ -98,7 +73,7 @@
 
                         <!-- Cart Button -->
                         <button v-if="canAddTocart(lesson)" v-on:click="addtoCart(lesson)">
-                            Add To Cart
+                            <span class="fas fa-cart-plus"></span> Add To Cart
                         </button>
                         <button v-else disabled>
                             Add To Cart
@@ -112,17 +87,17 @@
             <!-- Checkout and Shopping Cart Division -->
             <div id="cartDisplayDiv" v-else>
                 <!-- Page Subtile -->
-                <div><span style="font-weight: bold; font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif; font-size: x-large;" v-text="checkoutsub"></span></div>
+                <div><span id="checkoutsub" v-text="checkoutsub"></span></div>
 
                 <!-- Lesson list of added lessons -->
                 <div v-for="item in cart" id="checkoutLessons">
-                    <!-- Lesson Details displayed -->
 
+                    <!-- Lesson Details displayed -->
                     <span v-text="item.Subject"></span>
-                    <span style="margin-left:200px;"> Location: <span v-text="item.Location"></span></span>
+                    <span class="checkout-detail" > Location: <span v-text="item.Location"></span></span>
                     <div>
                         <span>Price Per Lesson: <span v-text = "item.price"></span></span>
-                        <span style="margin-left:200px"> Spaces Chosen: <span v-text="item.quantity"></span></span>
+                        <span class="checkout-detail" > Spaces Chosen: <span v-text="item.quantity"></span></span>
                     </div>
 
                     <!-- Removal Button -->
@@ -132,7 +107,7 @@
                 </div>
 
                 <!-- Checkout Details of Customer -->
-                <div name="checkoutSection" style="margin:20px;border:20px;">
+                <div name="checkoutSection" id="checkoutCustomerDetailBox">
                     <span >Full Name : <input type="text" v-if="cartAggregate <= 0" disabled> <input v-else type="text" v-model="checkoutDetails.fullName" id="checkoutName"></span>
                     <span>Phone Number : <input type="text" v-if="cartAggregate <= 0" disabled><input v-else type="text" v-model="checkoutDetails.phone" id="checkoutNumber"></span>
 
@@ -146,12 +121,8 @@
                     <span class="error" v-if="checkoutPhoneErrs"> please enter a valid phone number </span> <span v-else></span>
 
                 </div>
-
-
             </div>
-
         </div>
-
 
         <!-- Vuejs Script -->
         <script type="text/javascript">
@@ -209,17 +180,12 @@
 
                     //function to toggle between ascending and descending
                     toggleOrder(order) {
-                        if(order){
-                            this.ascending = true;
-                        }
-                        else if(!order){
-                            this.ascending = false;
-                        }
+                        order ? this.ascending = true : this.ascending = false;
                     },
 
                     //Function to remove 1 space from an item in cart
                     remove(course){
-                        
+
                         //if there's 1 quantity, then remove quantity from cart
                         if (course.quantity == 1 ){
                             this.cart.splice(this.cart.indexOf(course),1);
@@ -309,6 +275,7 @@
                             }
                         }
                     },
+
                     //Validating the Name text field in Checkout Page
                     checkoutNameErrs(){
 
