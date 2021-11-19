@@ -63,26 +63,27 @@
                 <div id="lessonBlock" v-for="lesson in sortlessons" >
                     <div v-if="lesson.showLesson">
                         <!-- lesson information -->
-                        <h2 v-text="lesson.Subject"></h2>
                         <img class="lessonimg" v-bind:src="lesson.image">
-                        <h4 v-text="lesson.Location"></h4>
-                        <h4 v-text="lesson.price"></h4>
+                        <div id="infoContainer">
+                            <span class= "lessonInfo" id="lessonInfoSub" v-text="lesson.Subject"></span>
+                            <span class= "lessonInfo">Location: <span v-text="lesson.Location"></span></span>
+                            <span class= "lessonInfo">Price : <span v-text="lesson.price"></span></span>
+                        
+                            <!-- product count message-->
+                            <span class="lessonInfo" v-if="canAddTocart(lesson) == false ">
+                                All Spaces Booked!
+                            </span>
+                            <!-- only less than 3 left -->
+                            <span class="lessonInfo" v-else>Spaces: {{lesson.spaces}} </span>
 
-                        <!-- product count message-->
-                        <span v-if="canAddTocart(lesson) == false ">
-                            All Spaces Booked!
-                        </span>
-                        <!-- only less than 3 left -->
-                        <span v-else>Spaces: {{lesson.spaces}} </span>
-
+                        </div>
                         <!-- Cart Button -->
-                        <button v-if="canAddTocart(lesson)" v-on:click="addtoCart(lesson)">
+                        <button class="addToCartButton" v-if="canAddTocart(lesson)" v-on:click="addtoCart(lesson)">
                             <span class="fas fa-cart-plus"></span> Add To Cart
                         </button>
-                        <button v-else disabled>
+                        <button class="addToCartButton" v-else disabled>
                             Add To Cart
                         </button>
-
                     </div>
                 </div>
 
@@ -90,8 +91,6 @@
 
             <!-- Checkout and Shopping Cart Division -->
             <div id="cartDisplayDiv" v-else>
-                <!-- Page Subtile -->
-                <div><span id="checkoutsub" v-text="checkoutsub"></span></div>
 
                 <!-- Lesson list of added lessons -->
                 <div v-for="item in cart" id="checkoutLessons">
@@ -134,7 +133,6 @@
                 el:'#lessonplanapp',
                 //Data variables used in the page
                 data:{
-                    lessonsub: 'Browse Our Lesson Catalogue',
                     lessons:lessons,
                     checkoutLogic: true,
                     ascending: true,
@@ -145,8 +143,7 @@
                     checkoutDetails:{
                         fullName: '',
                         phone:''
-                    },
-                    checkoutsub: 'Your Shopping Cart'
+                    }
 
                 },
                 //methods used within the page
