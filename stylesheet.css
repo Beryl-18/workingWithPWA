@@ -1,7 +1,7 @@
 /* Direct document styling*/
 body{
     margin:0;
-    /* background-color:#0B0C10; */
+    background-color:#0B0C10;
 }
 
 /* Additional ID Styling */
@@ -40,7 +40,7 @@ body{
 
 /* Styling for the navbar */
 #navbar {
-    background-color:black;
+    display:block;
     height:7%;
     padding:20px;
     padding-left:45px;
@@ -76,6 +76,25 @@ body{
 .checkoutCart:hover:enabled{
     background-color:#66fcf1;
     transition:0.4s;
+}
+
+/* Styling for the sort bar */
+#sortBar{
+    background-color:#0B0C10;
+    padding:20px;
+    color:white;
+    box-shadow: 1px 1px 18px -1px #e8e8e8;
+    text-align:center;
+}
+#sortSelect{
+    padding:10px;
+    background-color:auto;
+    border-color:black;
+}
+
+.sortOption{
+    margin-left:23px;
+    margin-right:23px;
 }
 
 /* Additional Class Styling */

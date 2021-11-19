@@ -25,30 +25,39 @@
                 <div>
                     <button class="checkoutCart" v-if="cartAggregate > 0" v-on:click="showCheckout()">
                         <!-- create logic to switch between checkout and lesson plan? -->
-                        {{cartAggregate}} Checkout
+                        Checkout <span class="fas fa-cart-plus"></span>{{cartAggregate}}
                     </button>
                     <button class="checkoutCart" v-else disabled>
                         <!-- create logic to switch between checkout and lesson plan? -->
-                        {{cartAggregate}} Checkout
+                         Checkout <span class="fas fa-cart-plus"></span>
                     </button>
                 </div>
             </div>
             
             <!-- Lesson Plans Division-->
             <div v-if="checkoutLogic" id="lessonDisplayDiv">
-                <br>
-                <!-- Sorting/order Buttons -->
-                <div name="sorting_options">
-                    <select v-model="type">
-                        <option disabled value="">Type</option>
-                        <option v-for="type in types" v-bind:value="type"> {{type}}</option>
-                    </select>
 
-                    <input type="radio" name="order" v-on:click="toggleOrder(true)" checked>
-                    <label for="asc">Ascending</label>
-                    <input type="radio" name= "order" v-on:click="toggleOrder(false)">
-                    <label for="desc">Descending</label>
-                </div> 
+                <div id="sortBar">
+                    <!-- Sorting/order Buttons -->
+                    <div name="sorting_options">
+                        <span class="sortOption">
+                            <select v-model="type" id="sortSelect">
+                                <option disabled value="">Type</option>
+                                <option v-for="type in types" v-bind:value="type"> {{type}}</option>
+                            </select>
+                        </span>
+
+                        <span class="sortOption">
+                            <input type="radio" name="order" v-on:click="toggleOrder(true)" checked>
+                            <label for="asc">Ascending</label>
+                        </span>
+
+                        <span class="sortOption">
+                            <input type="radio" name= "order" v-on:click="toggleOrder(false)">
+                            <label for="desc">Descending</label>
+                        </span>
+                    </div> 
+                </div>
 
                 <!-- Displaying Lessons individually -->
                 <div id="lessonBlock" v-for="lesson in sortlessons" >
