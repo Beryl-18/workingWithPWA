@@ -1,1 +1,2 @@
 The Github Pages link for this website is here : https://beryl-18.github.io/e-commerce-lessonplan/
+The public respository link for this website is here : https://github.com/Beryl-18/e-commerce-lessonplan

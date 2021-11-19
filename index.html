@@ -25,7 +25,7 @@
                 <div>
                     <button class="checkoutCart" v-if="cartAggregate > 0" v-on:click="showCheckout()">
                         <!-- create logic to switch between checkout and lesson plan? -->
-                        Checkout <span class="fas fa-cart-plus"></span>{{cartAggregate}}
+                        Checkout <span class="fas fa-cart-plus"></span> {{cartAggregate}}
                     </button>
                     <button class="checkoutCart" v-else disabled>
                         <!-- create logic to switch between checkout and lesson plan? -->
@@ -92,36 +92,36 @@
             <!-- Checkout and Shopping Cart Division -->
             <div id="cartDisplayDiv" v-else>
 
+                <h2> Checkout </h2>
                 <!-- Lesson list of added lessons -->
-                <div v-for="item in cart" id="checkoutLessons">
+                <div v-for="item in cart" id="checkoutLessonsContainer">
 
-                    <!-- Lesson Details displayed -->
-                    <span v-text="item.Subject"></span>
-                    <span class="checkout-detail" > Location: <span v-text="item.Location"></span></span>
-                    <div>
-                        <span>Price Per Lesson: <span v-text = "item.price"></span></span>
-                        <span class="checkout-detail" > Spaces Chosen: <span v-text="item.quantity"></span></span>
+                    <div class="checkout-inner">
+                        <!-- Lesson Details displayed -->
+                            <strong><span v-text="item.Subject" class="checkout-info"></span></strong>
+                            <span class="checkout-info">Price Per Lesson: <strong><span v-text = "item.price"></span></strong></span>
+                            <span class="checkout-info" > Spaces Chosen: <strong><span v-text="item.quantity"></span></strong></span>
+                    
+                        <!-- Removal Button -->
+                        <button v-on:click="remove(item)" class="remove-btn">
+                            Remove a Space
+                        </button>
                     </div>
-
-                    <!-- Removal Button -->
-                    <button v-on:click="remove(item)">
-                        Remove a Space
-                    </button>
                 </div>
 
                 <!-- Checkout Details of Customer -->
-                <div name="checkoutSection" id="checkoutCustomerDetailBox">
-                    <span >Full Name : <input type="text" v-if="cartAggregate <= 0" disabled> <input v-else type="text" v-model="checkoutDetails.fullName" id="checkoutName"></span>
-                    <span>Phone Number : <input type="text" v-if="cartAggregate <= 0" disabled><input v-else type="text" v-model="checkoutDetails.phone" id="checkoutNumber"></span>
+                <div name="checkoutSection" id="checkout-customer-details">
+                    <span class="customer-details-inner-item">Full Name : <input type="text" v-if="cartAggregate <= 0" disabled> <input v-else type="text" v-model="checkoutDetails.fullName" id="checkoutName"></span>
+                    <span class="customer-details-inner-item">Phone Number : <input type="text" v-if="cartAggregate <= 0" disabled><input v-else type="text" v-model="checkoutDetails.phone" id="checkoutNumber"></span>
 
 
                     <!-- enable checkout if both full name and phone number are entered without errors, else disable-->
-                    <button v-if="enableCheckout" v-on:click="checkoutConfirm"> Checkout </button> 
-                    <button v-else disabled> Checkout </button>
+                    <button class="checkout-btn" v-if="enableCheckout" v-on:click="checkoutConfirm"> Checkout </button> 
+                    <button class="checkout-btn" v-else disabled> Checkout </button>
 
                     <!-- display errors for user information -->
-                    <span class="error" v-if="checkoutNameErrs"> please enter a valid name </span> <span v-else></span>
-                    <span class="error" v-if="checkoutPhoneErrs"> please enter a valid phone number </span> <span v-else></span>
+                    <span class="error" v-if="checkoutNameErrs"> *please enter a valid name </span> <span v-else></span>
+                    <span class="error" v-if="checkoutPhoneErrs"> *please enter a valid phone number </span> <span v-else></span>
 
                 </div>
             </div>
@@ -199,7 +199,7 @@
                     
                     //Function to process Checkout
                     checkoutConfirm(){
-                        alert("Order Has Been placed for " + this.checkoutDetails.fullName +". Thank you!");
+                        alert("Order has been placed for " + this.checkoutDetails.fullName +". Thank you!");
 
                         //reset cart and refresh the page
                         this.cart.splice(0, this.cart.length);
