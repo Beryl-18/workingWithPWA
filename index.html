@@ -7,6 +7,12 @@
         <!-- linking the lesson plan script and external stylesheet-->
         <script src="lessons.js"></script>
         <link rel="stylesheet" href="stylesheet.css">
+        <link rel="manifest" href="index.webmanifest">
+        <script>
+            if ('serviceWorker' in navigator)
+                navigator.serviceWorker.register('service-worker.js');
+            
+        </script>
 
     </head>
     <body>

@@ -1,4 +1,4 @@
-/* Direct document styling*/
+    /* Direct document styling*/
 body{
     margin:0;
     background-color:white;
@@ -78,6 +78,7 @@ body{
     margin:3.4%;
     border:3%;
     display:inline-block;
+    text-align:center;
 }
 #lessonInfoSub{
     font-size:larger;
