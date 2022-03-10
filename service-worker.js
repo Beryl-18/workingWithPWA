@@ -12,6 +12,7 @@ var cacheFiles = [
     'images/finance.jpg',
     'images/french.jpg',
     'images/icon.png',
+    'images/icon_192.png',
     'images/math.jpg',
     'images/music.jpg',
     'images/pottery.jpg',
